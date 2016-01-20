@@ -70,15 +70,15 @@
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
             <div data-role="content">
-
+                   home
             </div>
             <div data-position="fixed" data-role="footer" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home" data-transition="none" class="ui-btn-active ui-state-persist" data-icon="home">Inicio</a></li>
-                        <li><a href="#search" data-transition="none"  data-icon="search">Buscar</a></li>
-                        <li><a href="#galery" data-transition="none"  data-icon="camera">Galeria</a></li>
-                        <li><a href="#profile" data-transition="none" data-icon="user">Perfil</a></li>
+                        <li><a href="#" onclick="home()"  class="ui-btn-active ui-state-persist" data-icon="home">Inicio</a></li>
+                        <li><a href="#" onclick="searchs()"   data-icon="search">Buscar</a></li>
+                        <li><a href="#galery"   data-icon="camera">Galeria</a></li>
+                        <li><a href="#profile"  data-icon="user">Perfil</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -91,15 +91,15 @@
 
             </div><!-- /header -->
             <div data-role="content">
-
+                    buscar
             </div>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home" data-transition="none" data-prefetch="true" data-icon="home">Inicio</a></li>
-                        <li><a href="#search"  data-transition="none" data-prefetch="true" class="ui-btn-active ui-state-persist" data-icon="search">Buscar</a></li>
-                        <li><a href="#galery" data-transition="none" data-prefetch="true" data-icon="camera">Galeria</a></li>
-                        <li><a href="#profile" data-transition="none" data-prefetch="true" data-icon="user">Perfil</a></li>
+                        <li><a onclick="home()"  data-prefetch="true" data-icon="home">Inicio</a></li>
+                        <li><a href="#search"   data-prefetch="true" class="ui-btn-active ui-state-persist" data-icon="search">Buscar</a></li>
+                        <li><a href="#galery"  data-prefetch="true" data-icon="camera">Galeria</a></li>
+                        <li><a href="#profile"  data-prefetch="true" data-icon="user">Perfil</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -116,10 +116,10 @@
             <div data-role="footer" data-position="fixed" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home" data-transition="none" data-icon="home">Inicio</a></li>
-                        <li><a href="#search" data-transition="none" data-icon="search">Buscar</a></li>
-                        <li><a href="#galery" data-transition="none" data-icon="camera" class="ui-btn-active ui-state-persist">Galeria</a></li>
-                        <li><a href="#profile"  data-transition="none" data-icon="user">Perfil</a></li>
+                        <li><a href="#home"  data-icon="home">Inicio</a></li>
+                        <li><a href="#search"  data-icon="search">Buscar</a></li>
+                        <li><a href="#galery"  data-icon="camera" class="ui-btn-active ui-state-persist">Galeria</a></li>
+                        <li><a href="#profile"   data-icon="user">Perfil</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -136,10 +136,10 @@
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home" data-transition="none" data-icon="home">Inicio</a></li>
-                        <li><a href="#search" data-transition="none" data-icon="search">Buscar</a></li>
-                        <li><a href="#galery" data-transition="none" data-icon="camera">Galeria</a></li>
-                        <li><a href="#profile" data-transition="none" class="ui-btn-active ui-state-persist" data-icon="user">Perfil</a></li>
+                        <li><a href="#home"  data-icon="home">Inicio</a></li>
+                        <li><a href="#search"  data-icon="search">Buscar</a></li>
+                        <li><a href="#galery"  data-icon="camera">Galeria</a></li>
+                        <li><a href="#profile"  class="ui-btn-active ui-state-persist" data-icon="user">Perfil</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -151,6 +151,12 @@
         <script>
             var login = function () {
                 $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+            }
+            var home = function () {
+                $.mobile.changePage( "#home", { transition: "none", changeHash: false });
+            }
+            var searchs = function () {
+                $.mobile.changePage( "#search", { transition: "none", changeHash: false });
             }
         </script>
     </body>
