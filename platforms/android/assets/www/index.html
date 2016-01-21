@@ -50,12 +50,14 @@
                 </div><!-- /navbar -->
             </div><!-- /header -->
             <div data-role="content">
-                <form method="post">    
+                <form id="loginform" method="post" >    
                         <div class="ui-field-contain">
                             <input type="email" name="email" id="email" placeholder="Your email..">
-                            <input type="password" name="password" id="email" placeholder="Password">
+                            <input type="password" name="password" id="password" placeholder="Password">
+                            <input type="password" name="confirm" id="confpassword" placeholder="Confirm Password"  >
                         </div>
                     <input type="button" onclick="login()" value="Login">
+                    <input type="button" id="register" onclick="registrar()" value="Register">
                 </form>
             </div>
             <div data-role="footer" data-position="fixed">
@@ -66,7 +68,7 @@
         <div data-role="page" id="home">
             <div data-role="header" style="overflow:hidden;" data-theme="b">
                 <h1>header</h1>
-                <a href="#login" class="ui-btn-right">Salir</a>
+                <a href="#login" class="ui-btn-right">Close</a>
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
             <div data-role="content">
@@ -75,10 +77,10 @@
             <div data-position="fixed" data-role="footer" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#" onclick="home()"  class="ui-btn-active ui-state-persist" data-icon="home">Inicio</a></li>
-                        <li><a href="#" onclick="searchs()"   data-icon="search">Buscar</a></li>
-                        <li><a href="#galery"   data-icon="camera">Galeria</a></li>
-                        <li><a href="#profile"  data-icon="user">Perfil</a></li>
+                        <li><a  onclick="home()"  class="ui-btn-active ui-state-persist" data-icon="home">Home</a></li>
+                        <li><a  onclick="searchs()"   data-icon="search">Search</a></li>
+                        <li><a  onclick="galery()"   data-icon="camera">Gallery</a></li>
+                        <li><a  onclick="profile()" data-icon="user">Profile</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -96,10 +98,10 @@
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
-                        <li><a onclick="home()"  data-prefetch="true" data-icon="home">Inicio</a></li>
-                        <li><a href="#search"   data-prefetch="true" class="ui-btn-active ui-state-persist" data-icon="search">Buscar</a></li>
-                        <li><a href="#galery"  data-prefetch="true" data-icon="camera">Galeria</a></li>
-                        <li><a href="#profile"  data-prefetch="true" data-icon="user">Perfil</a></li>
+                        <li><a onclick="home()"  data-prefetch="true" data-icon="home">Home</a></li>
+                        <li><a onclick="searchs()"   data-prefetch="true" class="ui-btn-active ui-state-persist" data-icon="search">Search</a></li>
+                        <li><a onclick="galery()"  data-prefetch="true" data-icon="camera">Gallery</a></li>
+                        <li><a onclick="profile()"  data-prefetch="true" data-icon="user">Profile</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -116,10 +118,10 @@
             <div data-role="footer" data-position="fixed" >
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home"  data-icon="home">Inicio</a></li>
-                        <li><a href="#search"  data-icon="search">Buscar</a></li>
-                        <li><a href="#galery"  data-icon="camera" class="ui-btn-active ui-state-persist">Galeria</a></li>
-                        <li><a href="#profile"   data-icon="user">Perfil</a></li>
+                        <li><a onclick="home()"  data-icon="home">Home</a></li>
+                        <li><a onclick="searchs()"  data-icon="search">Search</a></li>
+                        <li><a onclick="galery()"  data-icon="camera" class="ui-btn-active ui-state-persist">Gallery</a></li>
+                        <li><a onclick="profile()"   data-icon="user">Profile</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -136,10 +138,10 @@
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
                     <ul>
-                        <li><a href="#home"  data-icon="home">Inicio</a></li>
-                        <li><a href="#search"  data-icon="search">Buscar</a></li>
-                        <li><a href="#galery"  data-icon="camera">Galeria</a></li>
-                        <li><a href="#profile"  class="ui-btn-active ui-state-persist" data-icon="user">Perfil</a></li>
+                        <li><a onclick="home()"  data-icon="home">Home</a></li>
+                        <li><a onclick="searchs()"  data-icon="search">Search</a></li>
+                        <li><a onclick="galery()"  data-icon="camera">Gallery</a></li>
+                        <li><a onclick="profile()"  class="ui-btn-active ui-state-persist" data-icon="user">Profile</a></li>
                     </ul>
                 </div><!-- /navbar -->
             </div>
@@ -149,14 +151,39 @@
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script>
+            $(document).ready(function(){
+               $("#confpassword").css("display","none"); 
+            });
+            var registrar=function(){
+                if($("#confpassword").val().length<=0){
+                    $("#confpassword").css("display","block");
+                }else{
+                    console.log($("#loginform").serialize());
+                    $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#loginform").serialize()).done(function (data) {
+                        console.log(data);
+                        $("#confpassword").css("display","none");
+                    });
+                }
+            }
             var login = function () {
-                $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+                $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
+                    console.log(data);
+                    if(data!=0 && data!=-1){
+                        $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+                    }
+                });
             }
             var home = function () {
                 $.mobile.changePage( "#home", { transition: "none", changeHash: false });
             }
             var searchs = function () {
                 $.mobile.changePage( "#search", { transition: "none", changeHash: false });
+            }
+            var galery = function () {
+                $.mobile.changePage( "#galery", { transition: "none", changeHash: false });
+            }
+            var profile = function () {
+                $.mobile.changePage( "#profile", { transition: "none", changeHash: false });
             }
         </script>
     </body>
