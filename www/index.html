@@ -52,9 +52,9 @@
             <div data-role="content">
                 <form id="loginform" method="post" >    
                         <div class="ui-field-contain">
-                            <input type="email" name="email" id="email" placeholder="Your email..">
-                            <input type="password" name="password" id="password" placeholder="Password">
-                            <input type="password" name="confirm" id="confpassword" placeholder="Confirm Password"  >
+                            <input type="email" name="email" id="frmemail" placeholder="Your email..">
+                            <input type="password" name="password" id="frmpassword" placeholder="Password">
+                            <input type="password" name="confirm" id="confirm" placeholder="Confirm"   >
                         </div>
                     <input type="button" onclick="login()" value="Login">
                     <input type="button" id="register" onclick="registrar()" value="Register">
@@ -152,26 +152,62 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script>
             $(document).ready(function(){
-               $("#confpassword").css("display","none"); 
+               $("#confirm").css("display","none"); 
             });
             var registrar=function(){
-                if($("#confpassword").val().length<=0){
-                    $("#confpassword").css("display","block");
-                }else{
-                    console.log($("#loginform").serialize());
-                    $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#loginform").serialize()).done(function (data) {
-                        console.log(data);
-                        $("#confpassword").css("display","none");
-                    });
-                }
+                if($("#frmemail").val()!==""){
+                    if($("#frmpassword").val()!==""){
+                        $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/val/",$("#loginform").serialize()).done(function (data) {
+                            if(!data){
+                                if($("#confirm").val().length<=0 || $("#confirm").val()===null && !$("#confirm")){
+                                    //$.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#loginform").serialize()).done(function (data) {
+                                    $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#loginform").serialize()).done(function (data) {                            
+                                        $("#confirm").css("display","block");
+                                        $("#confirm").css("border","solid 1px red");
+                                    });
+                                }else{
+                                    //$.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
+                                    console.log("entro");
+                                    $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/confirm/",$("#loginform").serialize()).done(function (data) {
+
+                                        if(data!=0 && data!=-1){
+                                            $("#confirm").val("");
+                                            $("#confirm").css("display","none");
+                                        }
+                                    });
+                                }
+                            }else{
+                                alert("Este usuario ya existe!");
+                                navigator.notification.alert("Este usuario ya existe!");
+                            }
+                        });
+                    }else{
+                        alert("Debe ingresar una contrasena!");
+                        navigator.notification.alert("Debe ingresar una contraseña!");
+                    }
+               }else{
+                        alert("Debe ingresar una cuanta de correo!");
+                        navigator.notification.alert("Debe ingresar una cuanta de correo!");
+               }
             }
             var login = function () {
-                $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
-                    console.log(data);
-                    if(data!=0 && data!=-1){
-                        $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+                //$.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
+                if($("#frmemail").val()!==""){
+                    if($("#frmpassword").val()!==""){
+                        $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
+                            console.log(data);
+                            if(data!=0 && data!=-1){
+                                $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+                            }
+                        });
+                    }else{
+                        alert("Debe ingresar una contrasena!");
+                        navigator.notification.alert("Debe ingresar una contraseña!");
                     }
-                });
+                }else{
+                    alert("Debe ingresar una cuanta de correo!");
+                    navigator.notification.alert("Debe ingresar una cuanta de correo!");
+                }
             }
             var home = function () {
                 $.mobile.changePage( "#home", { transition: "none", changeHash: false });
