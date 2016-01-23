@@ -49,3 +49,9 @@ var app = {
 };
 
 app.initialize();
+
+function valInputs(id){
+    $.each($(id).serializeArray(), function(i, field) {
+        console.log(field.name+" = "+field.value);
+    });
+}

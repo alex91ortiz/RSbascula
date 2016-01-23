@@ -39,32 +39,42 @@
     <body>
         <div data-role="page" id="login">
             <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
-                <h1>header</h1>
-                <!--<a href="#" data-icon="gear" class="ui-btn-right">Options</a>-->
-                <!--<div data-role="navbar">
-                    <ul>
-                        <li><a href="#">One</a></li>
-                        <li><a href="#">Two</a></li>
-                        <li><a href="#">Three</a></li>
-                    </ul>
-                </div><!-- /navbar -->
+                <h1>header</h1>        
+                <a href="#register" class="ui-btn-right">Registrar</a>
             </div><!-- /header -->
             <div data-role="content">
                 <form id="loginform" method="post" >    
                         <div class="ui-field-contain">
                             <input type="email" name="email" id="frmemail" placeholder="Your email..">
                             <input type="password" name="password" id="frmpassword" placeholder="Password">
-                            <input type="password" name="confirm" id="confirm" placeholder="Confirm"   >
                         </div>
                     <input type="button" onclick="login()" value="Login">
-                    <input type="button" id="register" onclick="registrar()" value="Register">
                 </form>
             </div>
             <div data-role="footer" data-position="fixed">
                 <h4>footer</h4>
             </div>
         </div>
-        
+        <div data-role="page" id="register">
+            <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
+                <h1>header</h1>        
+                <a href="#login" class="ui-btn-right">Salir</a>
+            </div><!-- /header -->
+            <div data-role="content">
+                <form id="registerform" method="post" >    
+                        <div class="ui-field-contain">
+                            <input type="text" name="name" id="name" placeholder="name"   >
+                            <input type="email" name="email" id="frmemail" placeholder="Your email..">
+                            <input type="password" name="password" id="frmpassword" placeholder="Password">
+                            <input type="password" name="confirm" id="confirm" placeholder="Confirm"   >
+                        </div>
+                    <input type="button" id="btnregister" onclick="registrar()" value="Register">
+                </form>
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <h4>footer</h4>
+            </div>
+        </div>
         <div data-role="page" id="home">
             <div data-role="header" style="overflow:hidden;" data-theme="b">
                 <h1>header</h1>
@@ -150,77 +160,7 @@
         <script type="text/javascript" src="js/jquery-mobile/jquery.mobile-1.4.0.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script>
-            $(document).ready(function(){
-               $("#confirm").css("display","none"); 
-            });
-            var registrar=function(){
-                if($("#frmemail").val()!==""){
-                    if($("#frmpassword").val()!==""){
-                        $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/val/",$("#loginform").serialize()).done(function (data) {
-                            if(!data){
-                                if($("#confirm").val().length<=0 || $("#confirm").val()===null && !$("#confirm")){
-                                    //$.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#loginform").serialize()).done(function (data) {
-                                    $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#loginform").serialize()).done(function (data) {                            
-                                        $("#confirm").css("display","block");
-                                        $("#confirm").css("border","solid 1px red");
-                                    });
-                                }else{
-                                    //$.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
-                                    console.log("entro");
-                                    $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/confirm/",$("#loginform").serialize()).done(function (data) {
-
-                                        if(data!=0 && data!=-1){
-                                            $("#confirm").val("");
-                                            $("#confirm").css("display","none");
-                                        }
-                                    });
-                                }
-                            }else{
-                                alert("Este usuario ya existe!");
-                                navigator.notification.alert("Este usuario ya existe!");
-                            }
-                        });
-                    }else{
-                        alert("Debe ingresar una contrasena!");
-                        navigator.notification.alert("Debe ingresar una contraseña!");
-                    }
-               }else{
-                        alert("Debe ingresar una cuanta de correo!");
-                        navigator.notification.alert("Debe ingresar una cuanta de correo!");
-               }
-            }
-            var login = function () {
-                //$.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
-                if($("#frmemail").val()!==""){
-                    if($("#frmpassword").val()!==""){
-                        $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
-                            console.log(data);
-                            if(data!=0 && data!=-1){
-                                $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
-                            }
-                        });
-                    }else{
-                        alert("Debe ingresar una contrasena!");
-                        navigator.notification.alert("Debe ingresar una contraseña!");
-                    }
-                }else{
-                    alert("Debe ingresar una cuanta de correo!");
-                    navigator.notification.alert("Debe ingresar una cuanta de correo!");
-                }
-            }
-            var home = function () {
-                $.mobile.changePage( "#home", { transition: "none", changeHash: false });
-            }
-            var searchs = function () {
-                $.mobile.changePage( "#search", { transition: "none", changeHash: false });
-            }
-            var galery = function () {
-                $.mobile.changePage( "#galery", { transition: "none", changeHash: false });
-            }
-            var profile = function () {
-                $.mobile.changePage( "#profile", { transition: "none", changeHash: false });
-            }
-        </script>
+        <script type="text/javascript" src="js/login.js"></script>
+        <script type="text/javascript" src="js/pages.js"></script>
     </body>
 </html>
