@@ -34,6 +34,7 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="js/jquery-mobile/jquery.mobile-1.4.0.css">
+        <script type="text/javascript" src="js/imagen.js"></script>
         <title>Hello World</title>
     </head>
     <body>
@@ -75,10 +76,23 @@
                 <h4>footer</h4>
             </div>
         </div>
+        <div data-role="page" id="imagen">
+            <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
+                <h1>header</h1>        
+            </div><!-- /header -->
+            <div data-role="content">
+                <button onclick="getPhoto();">From Photo Album</button><br>
+                <!--<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>-->
+                <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+            </div>
+            <div data-role="footer" data-position="fixed">
+                <h4>footer</h4>
+            </div>
+        </div>
         <div data-role="page" id="home">
             <div data-role="header" style="overflow:hidden;" data-theme="b">
-                <h1>header</h1>
-                <a href="#login" class="ui-btn-right">Close</a>
+                <h1 class="headername">header</h1>
+                <a onclick="salir()" class="ui-btn-right">Close</a>
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
             <div data-role="content">
@@ -97,7 +111,7 @@
         </div>
         <div data-role="page" id="search">
             <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
-                <h1>header</h1>
+                <h1 class="headername">header</h1>
                 <a href="#login"  class="ui-btn-right">Salir</a>
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
 
@@ -118,7 +132,7 @@
         </div>
         <div data-role="page" id="galery">
             <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b" >
-                <h1>header</h1>
+                <h1 class="headername">header</h1>
                 <a href="#login" class="ui-btn-right">Salir</a>
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
@@ -138,7 +152,7 @@
         </div>
         <div data-role="page" id="profile">
             <div data-role="header" style="overflow:hidden;" data-position="fixed" accesskey="" data-theme="b" >
-                <h1>header</h1>
+                <h1 class="headername">header</h1>
                 <a href="#login" class="ui-btn-right">Salir</a>
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
@@ -159,8 +173,22 @@
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-mobile/jquery.mobile-1.4.0.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
         <script type="text/javascript" src="js/pages.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        
+        <script>
+            $(document).ready(function(){
+                console.log(window.localStorage.getItem("usuariologin"));
+                if(window.localStorage.getItem("usuariologin")==="A"){
+                    var data = JSON.parse(window.localStorage.getItem("usuario"));
+                    $(".headername").html(data.name);
+                    home();
+                }else{
+                    console.log("sdd");
+                    $.mobile.changePage( "#login", { transition: "none", changeHash: false });
+                }
+            });
+        </script>
     </body>
 </html>

@@ -10,7 +10,7 @@
                 $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/val",$("#registerform").serialize()).done(function (data) {
                     if(data){
                         $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#registerform").serialize()).done(function (data) {                            
-                            $.mobile.changePage( "#login", { transition: "slideup", changeHash: false });
+                            $.mobile.changePage( "#imagen", { transition: "slideup", changeHash: false });
                         });
                     }else {
                         alert("Ya tienes una cuenta con  este correo!");
@@ -34,6 +34,8 @@ var login = function () {
                 console.log(data);
                 if(data!=0 && data!=-1){
                     $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+                    window.localStorage.setItem("usuariologin","A");
+                    window.localStorage.setItem("usuario",JSON.stringify(data));
                 }else{
                     alert("La cuenta no existe o introdusca bien la contrasena!");
                     navigator.notification.alert("La cuenta no existe o introdusca bien la contrasena!");
@@ -49,3 +51,7 @@ var login = function () {
     }
 }
 
+var salir=function(){
+    window.localStorage.setItem("usuariologin","C");
+    $.mobile.changePage( "#login", { transition: "none", changeHash: false });
+}
