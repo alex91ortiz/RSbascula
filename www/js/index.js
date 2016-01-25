@@ -37,21 +37,38 @@ var app = {
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+        /*var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        console.log('Received Event: ' + id);*/
     }
 };
 
 app.initialize();
 
 function valInputs(id){
+    var flag=true;  
     $.each($(id).serializeArray(), function(i, field) {
-        console.log(field.name+" = "+field.value);
+        if(field.value==="" ){
+            console.log(field.name+" = "+field.value+" tipo ");
+            $("#"+field.name).css("border","solid red 1px");
+            flag=false;
+        }else if($("#"+field.name).attr("type")==="email"){
+           var srtemail=new RegExp("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/");
+           if(srtemail.test(field.value)){
+                $("#"+field.name).css("border","solid red 1px");
+                flag=false;   
+           }else{
+                $("#"+field.name).css("border","");   
+           }
+        }else{
+            $("#"+field.name).css("border","");
+        }
+        
     });
+    return flag;
 }
