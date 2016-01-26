@@ -81,9 +81,10 @@
                 <h1>header</h1>        
             </div><!-- /header -->
             <div data-role="content">
-                <button onclick="getPhoto();">From Photo Album</button><br>
+                <button onclick="getPhotoRegister();">From Photo Album</button><br>
                 <!--<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>-->
-                <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+                <img style="display:block;background-color: #E4E4E4;width:150px;height:150px;" id="smallImage" src="" />
+                <a onclick="home()">Continuar</a><br>
             </div>
             <div data-role="footer" data-position="fixed">
                 <h4>footer</h4>
@@ -181,8 +182,6 @@
             $(document).ready(function(){
                 console.log(window.localStorage.getItem("usuariologin"));
                 if(window.localStorage.getItem("usuariologin")==="A"){
-                    var data = JSON.parse(window.localStorage.getItem("usuario"));
-                    $(".headername").html(data.name);
                     home();
                 }else{
                     console.log("sdd");

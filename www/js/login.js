@@ -7,9 +7,9 @@
     if(valInputs("#registerform")){
         if($("#password").val().length>=6){
             if($("#password").val()===$("#confirm").val()){
-                $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/val",$("#registerform").serialize()).done(function (data) {
+                $.post("http://localhost:3000/usuario/val",$("#registerform").serialize()).done(function (data) {
                     if(data){
-                        $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#registerform").serialize()).done(function (data) {                            
+                        $.post("http://localhost:3000/usuario/",$("#registerform").serialize()).done(function (data) {                            
                             $.mobile.changePage( "#imagen", { transition: "slideup", changeHash: false });
                         });
                     }else {
@@ -33,7 +33,7 @@ var login = function () {
             $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
                 console.log(data);
                 if(data!=0 && data!=-1){
-                    $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+                    home();
                     window.localStorage.setItem("usuariologin","A");
                     window.localStorage.setItem("usuario",JSON.stringify(data));
                 }else{

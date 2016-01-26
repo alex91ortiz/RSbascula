@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 var home = function () {
+    var data = JSON.parse(window.localStorage.getItem("usuario"));
+    $(".headername").html(data.name);
     $.mobile.changePage( "#home", { transition: "none", changeHash: false });
 }
 var searchs = function () {

@@ -33,7 +33,7 @@ var login = function () {
             $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/login/",$("#loginform").serialize()).done(function (data) {
                 console.log(data);
                 if(data!=0 && data!=-1){
-                    $.mobile.changePage( "#home", { transition: "slideup", changeHash: false });
+                    home();
                     window.localStorage.setItem("usuariologin","A");
                     window.localStorage.setItem("usuario",JSON.stringify(data));
                 }else{
