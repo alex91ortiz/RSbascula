@@ -10,6 +10,8 @@
                 $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/val",$("#registerform").serialize()).done(function (data) {
                     if(data){
                         $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/",$("#registerform").serialize()).done(function (data) {                            
+                            window.localStorage.setItem("usuariologin","A");
+                            window.localStorage.setItem("usuario",JSON.stringify(data));
                             $.mobile.changePage( "#imagen", { transition: "slideup", changeHash: false });
                         });
                     }else {

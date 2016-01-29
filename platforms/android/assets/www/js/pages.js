@@ -6,6 +6,7 @@
 var home = function () {
     var data = JSON.parse(window.localStorage.getItem("usuario"));
     $(".headername").html(data.name);
+    $("#profileimage").attr("src",data.imagen);
     $.mobile.changePage( "#home", { transition: "none", changeHash: false });
 }
 var searchs = function () {
@@ -17,4 +18,12 @@ var galery = function () {
 var profile = function () {
     $.mobile.changePage( "#profile", { transition: "none", changeHash: false });
 }
-
+var register = function () {
+    $.mobile.changePage( "#register", { transition: "none", changeHash: false });
+}
+var continuar = function () {
+    var data = JSON.parse(window.localStorage.getItem("usuario"));
+    $.post("http://nodejsbuscaproducto-jcsoluciones.rhcloud.com/usuario/update",{email:data.email,imagen:$("#smallImage").attr("src")},function(date){
+        home();
+    });
+}

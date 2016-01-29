@@ -34,14 +34,13 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="js/jquery-mobile/jquery.mobile-1.4.0.css">
-        <script type="text/javascript" src="js/imagen.js"></script>
         <title>Hello World</title>
     </head>
     <body>
         <div data-role="page" id="login">
             <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
                 <h1>header</h1>        
-                <a href="#register" class="ui-btn-right">Registrar</a>
+                <a onclick="register()" class="ui-btn-right">Registrar</a>
             </div><!-- /header -->
             <div data-role="content">
                 <form id="loginform" method="post" >    
@@ -81,10 +80,10 @@
                 <h1>header</h1>        
             </div><!-- /header -->
             <div data-role="content">
-                <button onclick="getPhotoRegister();">From Photo Album</button><br>
+                <input type='file' accept='image/*' onchange="getPhotoRegister(event);"><br>
                 <!--<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>-->
                 <img style="display:block;background-color: #E4E4E4;width:150px;height:150px;" id="smallImage" src="" />
-                <a onclick="home()">Continuar</a><br>
+                <a onclick="continuar()">Continuar</a><br>
             </div>
             <div data-role="footer" data-position="fixed">
                 <h4>footer</h4>
@@ -93,6 +92,7 @@
         <div data-role="page" id="home">
             <div data-role="header" style="overflow:hidden;" data-theme="b">
                 <h1 class="headername">header</h1>
+                <img style="display:block;background-color: #E4E4E4;width:30px;height:30px;" id="profileimage" src="" />
                 <a onclick="salir()" class="ui-btn-right">Close</a>
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
@@ -138,7 +138,16 @@
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
             <div data-role="content">
-
+                  GIF
+                <div class="ui-grid-a">
+                    <div class="ui-block-a"><a class="ui-shadow ui-btn ui-corner-all" onclick="makeGif()" >Previous</a></div>
+                    <div class="ui-block-b"><a class="ui-shadow ui-btn ui-corner-all">Next</a></div>
+                </div>
+                <div class="ui-grid-solo">
+                    <div class="ui-block-a">
+                        <img id="gif" style="display:block;background-color: #E4E4E4;" width="800" height="300" alt="" src="">
+                    </div>
+                </div>
             </div>
             <div data-role="footer" data-position="fixed" >
                 <div data-role="navbar">
@@ -158,7 +167,7 @@
                 <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
             </div><!-- /header -->
             <div data-role="content">
-
+                profile
             </div>
             <div data-role="footer" data-position="fixed">
                 <div data-role="navbar">
@@ -174,20 +183,21 @@
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-mobile/jquery.mobile-1.4.0.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/gifshot.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
         <script type="text/javascript" src="js/pages.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        
+        <script type="text/javascript" src="js/imagen.js"></script>
         <script>
-            $(document).ready(function(){
-                console.log(window.localStorage.getItem("usuariologin"));
+            $( "#login" ).on( "pageshow", function( event, ui ) {
                 if(window.localStorage.getItem("usuariologin")==="A"){
-                    home();
-                }else{
-                    console.log("sdd");
-                    $.mobile.changePage( "#login", { transition: "none", changeHash: false });
+                    var data = JSON.parse(window.localStorage.getItem("usuario"));
+                    $(".headername").html(data.name);
+                    console.log(data.imagen);
+                    $("#profileimage").attr("src",data.imagen.toString().replace("data:base64,","data:image/jpeg;base64,"));
+                    $.mobile.changePage( "#home", { transition: "none", changeHash: false });
                 }
-            });
+            } );
         </script>
     </body>
 </html>
