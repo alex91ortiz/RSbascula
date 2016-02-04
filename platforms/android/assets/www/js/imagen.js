@@ -37,3 +37,14 @@ var getPhotoRegister = function(event) {
     }else{alert("no suposrt");}
     
 };
+
+var makeGif=function(){
+    gifshot.createGIF({}, function(obj) {
+        if(!obj.error) {
+            var image = obj.image,
+            animatedImage = document.createElement('gif');
+            animatedImage.src = image;
+            document.body.appendChild(animatedImage);
+        }
+    });
+}

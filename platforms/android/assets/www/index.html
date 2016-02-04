@@ -1,193 +1,55 @@
 <!DOCTYPE html>
 <!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
 -->
-<html>
+<html lang="en" >
     <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="js/jquery-mobile/jquery.mobile-1.4.0.css">
-        <title>Hello World</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+        
     </head>
     <body>
-        <div data-role="page" id="login">
-            <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
-                <h1>header</h1>        
-                <a onclick="register()" class="ui-btn-right">Registrar</a>
-            </div><!-- /header -->
-            <div data-role="content">
-                <form id="loginform" method="post" >    
-                        <div class="ui-field-contain">
-                            <input type="email" name="email" id="logemail" placeholder="Your email..">
-                            <input type="password" name="password" id="logpassword" placeholder="Password">
-                        </div>
-                    <input type="button" onclick="login()" value="Login">
-                </form>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form>
             </div>
-            <div data-role="footer" data-position="fixed">
-                <h4>footer</h4>
-            </div>
-        </div>
-        <div data-role="page" id="register">
-            <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
-                <h1>header</h1>        
-                <a href="#login" class="ui-btn-right">Salir</a>
-            </div><!-- /header -->
-            <div data-role="content">
-                <form id="registerform" method="post" >    
-                        <div class="ui-field-contain">
-                            <input type="text" name="name" id="name" placeholder="name"   >
-                            <input type="email" name="email" id="email" placeholder="Your email..">
-                            <input type="password" name="password" id="password" placeholder="Password minimo 6 caracteres">
-                            <input type="password" name="confirm" id="confirm" placeholder="Confirm"   >
-                        </div>
-                    <input type="button" id="btnregister" onclick="registrar()" value="Register">
-                </form>
-            </div>
-            <div data-role="footer" data-position="fixed">
-                <h4>footer</h4>
-            </div>
-        </div>
-        <div data-role="page" id="imagen">
-            <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
-                <h1>header</h1>        
-            </div><!-- /header -->
-            <div data-role="content">
-                <input type='file' accept='image/*' onchange="getPhotoRegister(event);"><br>
-                <!--<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>-->
-                <img style="display:block;background-color: #E4E4E4;width:150px;height:150px;" id="smallImage" src="" />
-                <a onclick="continuar()">Continuar</a><br>
-            </div>
-            <div data-role="footer" data-position="fixed">
-                <h4>footer</h4>
-            </div>
-        </div>
-        <div data-role="page" id="home">
-            <div data-role="header" style="overflow:hidden;" data-theme="b">
-                <h1 class="headername">header</h1>
-                <img style="display:block;background-color: #E4E4E4;width:30px;height:30px;" id="profileimage" src="" />
-                <a onclick="salir()" class="ui-btn-right">Close</a>
-                <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
-            </div><!-- /header -->
-            <div data-role="content">
-                   home
-            </div>
-            <div data-position="fixed" data-role="footer" >
-                <div data-role="navbar">
-                    <ul>
-                        <li><a  onclick="home()"  class="ui-btn-active ui-state-persist" data-icon="home">Home</a></li>
-                        <li><a  onclick="searchs()"   data-icon="search">Search</a></li>
-                        <li><a  onclick="galery()"   data-icon="camera">Gallery</a></li>
-                        <li><a  onclick="profile()" data-icon="user">Profile</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div>
-        </div>
-        <div data-role="page" id="search">
-            <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b">
-                <h1 class="headername">header</h1>
-                <a href="#login"  class="ui-btn-right">Salir</a>
-                <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
-
-            </div><!-- /header -->
-            <div data-role="content">
-                    buscar
-            </div>
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a onclick="home()"  data-prefetch="true" data-icon="home">Home</a></li>
-                        <li><a onclick="searchs()"   data-prefetch="true" class="ui-btn-active ui-state-persist" data-icon="search">Search</a></li>
-                        <li><a onclick="galery()"  data-prefetch="true" data-icon="camera">Gallery</a></li>
-                        <li><a onclick="profile()"  data-prefetch="true" data-icon="user">Profile</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div>
-        </div>
-        <div data-role="page" id="galery">
-            <div data-role="header" style="overflow:hidden;" data-position="fixed" data-theme="b" >
-                <h1 class="headername">header</h1>
-                <a href="#login" class="ui-btn-right">Salir</a>
-                <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
-            </div><!-- /header -->
-            <div data-role="content">
-
-            </div>
-            <div data-role="footer" data-position="fixed" >
-                <div data-role="navbar">
-                    <ul>
-                        <li><a onclick="home()"  data-icon="home">Home</a></li>
-                        <li><a onclick="searchs()"  data-icon="search">Search</a></li>
-                        <li><a onclick="galery()"  data-icon="camera" class="ui-btn-active ui-state-persist">Gallery</a></li>
-                        <li><a onclick="profile()"   data-icon="user">Profile</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div>
-        </div>
-        <div data-role="page" id="profile">
-            <div data-role="header" style="overflow:hidden;" data-position="fixed" accesskey="" data-theme="b" >
-                <h1 class="headername">header</h1>
-                <a href="#login" class="ui-btn-right">Salir</a>
-                <a href="#" data-icon="gear" class="ui-btn-left">Options</a>
-            </div><!-- /header -->
-            <div data-role="content">
-
-            </div>
-            <div data-role="footer" data-position="fixed">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a onclick="home()"  data-icon="home">Home</a></li>
-                        <li><a onclick="searchs()"  data-icon="search">Search</a></li>
-                        <li><a onclick="galery()"  data-icon="camera">Gallery</a></li>
-                        <li><a onclick="profile()"  class="ui-btn-active ui-state-persist" data-icon="user">Profile</a></li>
-                    </ul>
-                </div><!-- /navbar -->
-            </div>
+        </nav>
+        <div class="container" style="padding-top:100px">
+            <ul class="list-group">
+              <li class="list-group-item"><div class="media">
+                <div class="media-left media-middle">
+                    <img class="media-object" src="..." alt="..." width="100" height="100">
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">Middle aligned media</h4>
+                  <p>precio</p>
+                  <p>nombre supermercado</p>
+                  <p>direccion</p>
+                  <button type="button" class="btn btn-block btn-primary">Add</button>
+                </div>
+              </div></li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
         </div>
         <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="js/jquery-mobile/jquery.mobile-1.4.0.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/login.js"></script>
-        <script type="text/javascript" src="js/pages.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/imagen.js"></script>
-        <script>
-            $( "#login" ).on( "pageshow", function( event, ui ) {
-                if(window.localStorage.getItem("usuariologin")==="A"){
-                    var data = JSON.parse(window.localStorage.getItem("usuario"));
-                    $(".headername").html(data.name);
-                    console.log(data.imagen);
-                    $("#profileimage").attr("src",data.imagen.toString().replace("data:base64,","data:image/jpeg;base64,"));
-                    $.mobile.changePage( "#home", { transition: "none", changeHash: false });
-                }
-            } );
-        </script>
+        <script type="text/javascript" src="js/bootstrap.js"></script>
+        
     </body>
 </html>
